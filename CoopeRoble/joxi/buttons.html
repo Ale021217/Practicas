@@ -1,0 +1,124 @@
+<%@ Page Language="vb" AutoEventWireup="true" CodeBehind="ListaReportes.aspx.vb" Inherits="CoopeRoble.ListaReportes" %>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lista de Reportes - CoopeRoble</title>
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <!-- Puedes incluir otros CSS según necesites -->
+  <style>
+    /* Header y footer personalizados */
+    .custom-header {
+      background-color: #281966;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    .custom-footer {
+      background-color: #281966;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body class="body-bg-f8faff">
+  <form id="formListaReportes" runat="server">
+    <div class="all-section-area">
+      <!-- Header personalizado -->
+      <div class="custom-header">
+        <h1>CoopeRoble - Lista de Reportes</h1>
+      </div>
+      
+      <!-- Contenido principal -->
+      <div class="container my-4">
+        <asp:GridView ID="gvReportes" runat="server" AutoGenerateColumns="False" CssClass="table table-bordered">
+          <Columns>
+            <asp:BoundField DataField="id_reporte" HeaderText="ID Reporte" />
+            <asp:BoundField DataField="Usuario" HeaderText="Usuario" />
+            <asp:BoundField DataField="fecha_reporte" HeaderText="Fecha Reporte" DataFormatString="{0:dd/MM/yyyy}" />
+            <asp:BoundField DataField="Unidad" HeaderText="Unidad" />
+            <asp:BoundField DataField="imagen_averia" HeaderText="Imagen" />
+            <asp:BoundField DataField="descripcion" HeaderText="Descripción" />
+            <asp:BoundField DataField="TipoAveria" HeaderText="Tipo de Avería" />
+            <asp:BoundField DataField="estado" HeaderText="Estado" />
+            <!-- Columna de acciones -->
+            <asp:TemplateField HeaderText="Acciones">
+              <ItemTemplate>
+                <!-- Botón para ver detalles (llama a función JavaScript con datos del reporte) -->
+                <button type="button" class="btn btn-info btn-sm" 
+                  onclick='verDetalles("<%# Eval("id_reporte") %>", "<%# Eval("Usuario") %>", "<%# Eval("fecha_reporte", "{0:dd/MM/yyyy}") %>", "<%# Eval("Unidad") %>", "<%# Eval("imagen_averia") %>", "<%# Eval("descripcion") %>", "<%# Eval("TipoAveria") %>", "<%# Eval("estado") %>")'>
+                  Detalles
+                </button>
+                <!-- Botón para asignar el reporte -->
+                <button type="button" class="btn btn-success btn-sm" 
+                  onclick='asignarReporte("<%# Eval("id_reporte") %>")'>
+                  Asignar
+                </button>
+              </ItemTemplate>
+            </asp:TemplateField>
+          </Columns>
+        </asp:GridView>
+      </div>
+      
+      <!-- Footer personalizado -->
+      <div class="custom-footer">
+        <p>&copy; 2025 CoopeRoble. Todos los derechos reservados.</p>
+      </div>
+      
+      <!-- Modal para ver detalles -->
+      <div class="modal fade" id="detalleModal" tabindex="-1" aria-labelledby="detalleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-scrollable">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="detalleModalLabel">Detalles del Reporte</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p><strong>ID Reporte:</strong> <span id="modalIdReporte"></span></p>
+              <p><strong>Usuario:</strong> <span id="modalUsuario"></span></p>
+              <p><strong>Fecha Reporte:</strong> <span id="modalFechaReporte"></span></p>
+              <p><strong>Unidad:</strong> <span id="modalUnidad"></span></p>
+              <p><strong>Imagen:</strong> <span id="modalImagen"></span></p>
+              <p><strong>Descripción:</strong> <span id="modalDescripcion"></span></p>
+              <p><strong>Tipo Avería:</strong> <span id="modalTipoAveria"></span></p>
+              <p><strong>Estado:</strong> <span id="modalEstado"></span></p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  
+  <!-- Scripts JS -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.bundle.min.js"></script>
+  <script>
+    // Función para abrir la modal y asignar los datos
+    function verDetalles(id, usuario, fecha, unidad, imagen, descripcion, tipoAveria, estado) {
+      document.getElementById("modalIdReporte").innerText = id;
+      document.getElementById("modalUsuario").innerText = usuario;
+      document.getElementById("modalFechaReporte").innerText = fecha;
+      document.getElementById("modalUnidad").innerText = unidad;
+      document.getElementById("modalImagen").innerText = imagen;
+      document.getElementById("modalDescripcion").innerText = descripcion;
+      document.getElementById("modalTipoAveria").innerText = tipoAveria;
+      document.getElementById("modalEstado").innerText = estado;
+      var detalleModal = new bootstrap.Modal(document.getElementById("detalleModal"));
+      detalleModal.show();
+    }
+    
+    // Función para asignar el reporte
+    function asignarReporte(id) {
+      // Aquí puedes implementar la lógica de asignación (por ejemplo, usando AJAX)
+      alert("Asignar reporte con ID: " + id);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+C:\Users\PC Ruby 02\source\repos\CoopeRoble\CoopeRoble\obj\Release\CoopeRoble.vbproj.AssemblyReference.cache
+C:\Users\PC Ruby 02\source\repos\CoopeRoble\CoopeRoble\obj\Release\CoopeRoble.Resources.resources
+C:\Users\PC Ruby 02\source\repos\CoopeRoble\CoopeRoble\obj\Release\CoopeRoble.vbproj.GenerateResource.cache
+C:\Users\PC Ruby 02\source\repos\CoopeRoble\CoopeRoble\obj\Release\CoopeRoble.vbproj.CoreCompileInputs.cache
